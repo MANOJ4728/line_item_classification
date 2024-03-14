@@ -1,10 +1,8 @@
 import openai
 import requests
 
-# Sample invoice line item description
 invoice_description = "YOGURT,PLN BLNDED LOW FAT"
 
-# List of keywords to classify against
 keywords = [
     "Alcohol beverages",
     "Beverage services",
@@ -284,10 +282,8 @@ keywords = [
     "waste water services",
 ]
 
-# Add double quotes to each keyword
 quoted_keywords = ['"{}"'.format(keyword) for keyword in keywords]
 
-# Construct the prompt
 prompt = f"Classify the following invoice line item description:\n\n\"{invoice_description}\"\n\nKeywords: {', '.join(quoted_keywords)}"
 
 key = "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"
@@ -303,35 +299,8 @@ response = requests.post(url='https://api.openai.com/v1/chat/completions',
                         }
                         )
 
-# Extract the generated classification
 classification = response.json()['choices'][0]['message']['content'].strip()
 
 print(f"Classification: {classification}")
 
 
-
-
-# import openai
-# import requests
-
-# openai.api_key = YOUR_OPENAI_KEY
-
-# invoice_description = "YOGURT,PLN BLNDED LOW FAT"
-
-# keywords = [....]  # your keywords
-
-# quoted_keywords = ['"{}"'.format(keyword) for keyword in keywords]
-
-# prompt = f"Which category, from the provided list, does the following invoice line item description \
-# belong to?:\n\n\"{invoice_description}\"\n\nPossible categories are: {', '.join(quoted_keywords)}"
-
-# try:
-#     response = openai.Completion.create(
-#         engine="text-davinci-002",
-#         prompt=prompt,
-#         max_tokens=60
-#     )
-#     print(response.choices[0]['text'].strip())
-
-# except Exception as e:
-#     print(str(e))
